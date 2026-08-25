@@ -1,71 +1,90 @@
-# Software Engineering Foundations, Fall 2026.
+# Session 05 Homework: Login with Server-Side Auth
+Build a small website with a login page and a protected landing page. The login check must happen on the backend, not only in React.
 
-> Welcome to SWEF! We are incredibly excited to have you guys, and want you to get the absolute most you can out of SWEF.
+Goal
+Create two pages:
 
-## How to use this repo
+Login page (/login) — username and password inputs, submit button
+Landing page (/landing) — shown only after a successful login (welcome message, image, etc.)
+If someone types localhost:3000/landing without logging in, they should be sent back to /login.
 
-This is going to be one of the places where you spend most of your time at as a SWEF student. To get started on using this repo, here are the steps you should take:
+Important rule: server-side auth
+Checking the password in React alone is not enough.
 
-1. Create a github account.
+Your backend must:
 
-   - to get more detail into Git, check out [this](https://www.youtube.com/watch?v=tRZGeaHPoaw) video, or find a similar one on youtube
-   - [Another resource](https://docs.github.com/en/get-started/using-git/about-git)
-   - Set up Git AND GitHub Locally: [a video on how to do this](https://www.youtube.com/watch?v=wDRoduig_98)
-   - While creating your GitHub account, please use your northeastern email id, this gives you perks like GitHub Pro.
-   - Once you have set up your GitHub account, send a message in the slack thread with your github **_username_**
+Verify username/password on login
 
-2. Fork this repo.
-   - Go to [this](https://github.com/TamidNu/tcf-sp26) link and click on 'fork'. Keep the name the same when you fork the repository.
-   - Please do some research about what a GitHub Fork is
+Protect at least one API route that the landing page calls
 
-TODO: Add more detail and a guide about using this.
+Return 401 Unauthorized if the user is not logged in
 
-## Sessions:
+The frontend can redirect for UX, but security lives on the server.
 
-1. [Gitting into it!](01-git/)
-2. [Frontend Crash Course](02-frontend/) (HTML/CSS/JS foundations → Next.js, React, Tailwind)
-3. [Professional Development](03-profdev/) (resume, career paths, STAR, interview coding)
-4. [APIs & REST](04-api/) (REST + FastAPI + Insomnia in pre; Books CRUD in class; OpenAI wrapper for homework)
-5. [Database Design](05-database-design/)
-6. [Backend II: Architecture & Scalability](06-backend-architecture/)
 
-## Expectations
+# Coding stack
 
-**Our Commitment to You.**
+# Frontend
+React + Vite (recommended, you can use whatever you want)
+port 3000
 
-1. **Engaging and Hands-On Learning:** We are committed to delivering an engaging and hands-on learning experience in multiple fields of learning. Our teaching approach will be interactive and practical, ensuring that you gain a deep understanding of the fundamentals.
-2. **Homework and Feedback:** We will provide regular homework assignments tailored to different skill levels. These assignments are designed to reinforce your learning and provide opportunities for hands-on practice. We are dedicated to providing detailed feedback on your work to help you identify areas for improvement.
-3. **Support and Guidance:** If you ever feel like you are falling behind or struggling with any aspect of the course, we are here to support you. You can schedule one-on-one meetings with us to address your concerns, clarify concepts, or discuss your progress. Additionally, we hold office hours to provide assistance and answer your questions.
-4. **Final Project:** As a culmination of your learning journey, we will assist you in creating a final project that showcases your skills and knowledge. This project can serve as a valuable addition to your portfolio and resume, helping you demonstrate your capabilities to potential employers or clients.
+# Backend
+Flask
+port 8000
 
-Our commitment is not just about teaching the subject matter but also ensuring your success and growth throughout the course. We are dedicated to your learning journey and will do our best to provide you with the support and resources you need to excel in the course.
 
-> 📢 We will set up 1 on 1s if you don’t do your homework or don’t show up to class without telling us
 
-> This is for your benefit only—it’s not supposed to be intimidating. During the meeting, we’ll set up a plan which will best suit your own schedule and goals.
+What to build
+Backend (backend/)
+Create auth routes (e.g. in backend/routes/auth.py).
 
-**Attendance**: You are expected to attend all the sessions you can, HOWEVER, we understand that there are a multitude of other responsibilities and priorities you guys have—as there should be—so the biggest responsibility you guys have regarding attendance is COMMUNICATION. We want to know what you’ll have to miss so that we can help you succeed!
+1. Hardcode credentials in a backend file (we haven't learned databases yet so do this for now)
 
-<hr>
-📢 **If you have to miss a session:**
+2. POST /api/auth/login
 
-1. In a timely manner, create a group chat with the Software Engineering Foundations Committee Members on Slack informing them you will not be able to make it.
-2. Catch-up on what you missed by reviewing slides (that will be posted in this syllabus at Schedule & Curriculum) and homework. Ask classmates and instructors for questions, attending office hours to learn new concepts.
-3. Do the homework and submit it by the following session, just like everyone else, unless you’ve spoken to the Software Engineering Foundations Committee Members about an alternate plan to accommodate your situation.
-<hr>
+Accept JSON: { "username": "...", "password": "..." }
+If credentials match → return { "access_token": "...", "token_type": "bearer" }
+If not → return 401 with an error message
+3. GET /api/auth/me (protected)
 
-**In-Class Participation**. Interact with your fellow classmates. Ask questions. Have fun with the material presented in class. We would love to hear your voice!  Software Engineering Foundations is an experience for you and we’ll need your help making it amazing.
+Requires header: Authorization: Bearer <token>
+If valid token → return { "message": "Welcome!" } (or similar)
+If missing/invalid token → return 401
+4. Register your blueprint in main.py:
 
-> Please notify the Software Engineering Foundation Committee Members in advance if you predict that you will not be able to finish a session’s homework. If you do not notify us that you will not be able to finish a session’s homework or if you develop a pattern of missing out from homework, we will set up a 1:1 to make sure you are getting all the help you need to have a successful time at Software Engineering Foundations!
+app.register_blueprint(auth_bp, url_prefix="/api/auth")
+Tip: Look at backend/routes/users.py for JWT helpers (create_access_token, require_auth). You can reuse that pattern.
 
-> **Asking for Help**: Asking for help is immensely encouraged! Please do not struggle alone on a topic or homework—reach out to students, instructors and go to office hours. Not only will this increase class cohesion, but it will lessen the load on you and help you learn better. A win-win!
+Frontend (frontend/)
 
-> If you have a conceptual question where you are confused about what is taught, make sure to raise your hand and interrupt the instructor. This could be important for everyone to hear!
+# 1. Login.jsx
 
-<hr>
+input username + password
 
-## Group projects:
+On submit → POST /api/auth/login
+Success → save token, go to /landing
+Failure → show error, stay on login
 
-## Additional resources
+# 2. Landing.jsx
 
-##
+On load → call GET /api/auth/me with the token
+If 200 → show welcome content
+If 401 → redirect to /login
+
+# 3. App.jsx
+
+Route /login → Login
+Route /landing → Landing
+Route / → redirect to /login
+
+
+What NOT to do
+Don’t check the password only in React
+Don’t use if (isLoggedIn) in React as your only protection
+Don’t put the password in frontend code
+Don’t treat localStorage.setItem('loggedIn', 'true') as authentication
+
+# how we will check your work. 
+Submit your work by putting it in this activity's hw folder. We will check it following the below criteria. This activity should not be difficult, with AI you should be able to do it in 45-60 minutes. Look at tayak or tamidchatmatcher in prereading if you want examples of how the login page should work
+
+<img width="493" height="173" alt="image" src="https://github.com/user-attachments/assets/827739be-f0ee-457c-9f8f-741dead2bfb6" />
