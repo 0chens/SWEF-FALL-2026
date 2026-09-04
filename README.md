@@ -26,8 +26,8 @@ TODO: Add more detail and a guide about using this.
 2. [Frontend Crash Course](02-frontend/) (HTML/CSS/JS foundations → Next.js, React, Tailwind)
 3. [Professional Development](03-profdev/) (resume, career paths, STAR, interview coding)
 4. [APIs & REST](04-api/) (REST + FastAPI + Insomnia in pre; Books CRUD in class; OpenAI wrapper for homework)
-5. [Database Design](05-database-design/)
-6. [Backend II: Architecture & Scalability](06-backend-architecture/)
+5. [Backend II: Architecture & Scalability](05-backend2/)
+6. [Database Design](06-databases/)
 
 ## Expectations
 
