@@ -25,6 +25,8 @@ Watch these (about 5 minutes total):
 
 - [SQL Explained in 100 Seconds (Fireship)](https://www.youtube.com/watch?v=zsjvFFKOm3c)
 - [Supabase in 100 Seconds (Fireship)](https://www.youtube.com/watch?v=zBZgdTb-dns)
+- [Getting Started with Supabase Database](https://www.youtube.com/watch?v=C9kJwxhdw9A)
+- 
 
 **Takeaway:** data lives in **tables** (rows + typed columns). **SQL** is how you talk to a relational database. **Supabase** is hosted [Postgres](https://www.postgresql.org/) plus a dashboard, auto-generated APIs, and auth — so you do not install Postgres on your laptop for this class.
 
