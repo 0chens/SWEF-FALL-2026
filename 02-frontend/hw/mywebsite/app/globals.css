@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+/* Base colors from your palette. Edit these to change the site colors. */
+@theme {
+  --color-porcelain: #fdfffc;
+  --color-pale-sky: #c7d5e0;
+  --color-glaucous: #677697;
+  --color-dusty-lavender: #746b88;
+  --color-rosewood: #8e556a;
+  --color-soft-rosewood: #986478;
+  --color-ink: #303441;
+}
+
+body {
+  background: var(--color-porcelain);
+  color: var(--color-ink);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  color: var(--color-glaucous);
+}
+
+h2 {
+  color: var(--color-dusty-lavender);
+}
+
+a:focus-visible {
+  outline: 3px solid var(--color-rosewood);
+  outline-offset: 5px;
+}
