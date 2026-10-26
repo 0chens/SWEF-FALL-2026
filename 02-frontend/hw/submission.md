@@ -1,52 +1,29 @@
 # Homework 2 submission
 
-Draft reflection: review and adjust this to match what you learned before submitting.
+Fill this out (~200 words total across the writeup sections). See [README.md](README.md) for the full requirements.
 
 ## What I learned
-
-This week I learned how to split a website into smaller sections using headings, paragraphs, lists, and links. I practiced changing spacing, colors, and font weights with Tailwind classes. Different heading weights help show which information is most important. I also learned that checking the actual page in a browser matters because code alone does not show how the layout looks.
+Through this homeework I was able to learn the fundamentals of how a web application is structured and how different tools work together. I know how to work with components and edit styles and running a project locally. I used Codex to help me margin and bold colors and text for a prettier layout. I learned that building a website isn't just html but combining different code into an organized way.
 
 ## Next.js vs raw HTML/CSS
-
-With raw HTML and CSS, I would create separate HTML files and link a stylesheet. Next.js lets me write pages as React components. A folder with a page.tsx file creates a route. The shared layout keeps my navigation on both pages without copying it into each file.
+Next.js makes organization of larger website easier when compared to raw HTML and CSS. Instead of having one large HTML file, I can make componetes and orgaize pages seperately. HTML and CSS are important since they control the actual structure and appearance. Next.js provides an easier way of managing the application.
 
 ## How the tools fit together
-
-React builds the page using components and JSX, which looks similar to HTML. TypeScript adds type checking to JavaScript and helps catch mistakes. Tailwind provides classes for styling. Next.js puts these tools together and handles routes and rendering. My profile text is stored in one simple object so it is easy to update.
+Next.js is the structure of the application, React is for creating the different components and CSS is the design portion. Javascript and jsx adds the logic and page content. npm is used for installation for servers and development. The tools together create a workflow that peices everything together for an application.
 
 ## My interest page
 
-My draft interest page is about robotics. I chose it because my starter already described my work with TANX 3003. The page includes a short story, a list of programming work, and a link to FIRST Robotics Competition.
+For my interest page, I focused on my work in my highschool robotics team. This is because I gained most of my technical experience from there (though it is still very minor in experience). I tried to keep the formatting of this page similar to my home page.
 
 ## Screenshots
 
-### Home
-
-![Home page](home.png)
-
-### Interest
-
-![Robotics interest page](interest.png)
+- Home: ![Home page](mywebsite/home.png)
+- Interest: ![Interest page](mywebsite/interest.png)
 
 ## Project location
 
-The project is at `02-frontend/hw/mywebsite`.
-
-## Checks
-
-- Home includes a name, bio, GitHub link, and Tailwind styling.
-- Both pages share Home and Robotics navigation using Next.js Link.
-- `/interest` includes a title, story, list, external link, and Home link.
-- Verified Home → Robotics → Home in the running development server.
-- TypeScript checking passes.
-- No nested `.git` exists; `node_modules` and `.next` are ignored.
-- Production build currently fails in the existing Turbopack CSS worker setup; the development pages render successfully.
-- Commit and push are still pending.
-
-## AI assistance
-
-I used Codex to help draft the pages, styling, editable profile content, and this reflection, and to check navigation. I should review the draft and be able to explain the code before submitting.
+`02-frontend/hw/mywebsite`
 
 ## Optional: deploy link
 
-Not deployed.
+<!-- Vercel URL if you deployed -->
